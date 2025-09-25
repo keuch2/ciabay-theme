@@ -52,6 +52,13 @@ Se ha implementado exitosamente un **carousel unificado** que combina el hero ca
 ### **Mobile Layout (<768px)**
 ```
 ┌─────────────────────────────┐
+│       ┌─────────────┐       │
+│       │   INSUMOS   │       │
+│       │   (active)  │       │
+│       │             │       │
+│       └─────────────┘       │
+│    ← Swipe para cambiar     │
+├─────────────────────────────┤
 │      CONTENT PANEL          │
 │    HOY EL CAMPO EXIGE MÁS   │
 │    MÁS ROBUSTEZ...          │
@@ -60,14 +67,6 @@ Se ha implementado exitosamente un **carousel unificado** que combina el hero ca
 │    Descripción del slide    │
 │    [VER PRODUCTOS]          │
 │    [VER POR CULTIVO]        │
-├─────────────────────────────┤
-│                             │
-│       ┌─────────────┐       │
-│       │   INSUMOS   │       │
-│       │   (active)  │       │
-│       │             │       │
-│       └─────────────┘       │
-│    ← Swipe para cambiar     │
 └─────────────────────────────┘
 ```
 

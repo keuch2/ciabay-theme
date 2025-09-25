@@ -175,7 +175,7 @@ function ciabay_unified_carousel_shortcode($atts) {
         
         <!-- Mobile Layout -->
         <div class="mobile-layout">
-            <!-- Content Panel (Top) -->
+            <!-- Content Panel (Bottom) -->
             <div class="mobile-content-panel">
                 <div class="main-content">
                     <h2 class="main-title"><?php echo esc_html($atts['main_title']); ?></h2>
@@ -201,7 +201,7 @@ function ciabay_unified_carousel_shortcode($atts) {
                 </div>
             </div>
             
-            <!-- Single Card (Bottom) -->
+            <!-- Single Card (Top) -->
             <div class="mobile-card-container">
                 <?php foreach ($slides_data as $index => $slide): ?>
                 <div class="mobile-carousel-card <?php echo $index === 1 ? 'active' : ''; ?>" data-slide="<?php echo $index; ?>">

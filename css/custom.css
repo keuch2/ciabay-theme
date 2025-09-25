@@ -1515,11 +1515,12 @@ header.ciabay-main-header {
     padding: 40px 20px;
     color: white;
     text-align: center;
+    flex-direction: column;
 }
 
 @media (max-width: 768px) {
     .mobile-layout {
-        display: block;
+        display: flex;
     }
     
     .ciabay-unified-carousel {
@@ -1529,7 +1530,13 @@ header.ciabay-main-header {
 
 /* Mobile Content Panel */
 .mobile-content-panel {
-    margin-bottom: 40px;
+    order: 2;
+    margin-top: 40px;
+}
+
+/* Mobile Card Container - Move to top */
+.mobile-card-container {
+    order: 1;
 }
 
 .mobile-content-panel .main-title {

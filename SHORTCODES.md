@@ -17,7 +17,7 @@ This document explains how to use the custom shortcodes created for the Ciabay w
 
 **Features:**
 - **Desktop Layout**: Content panel on left, cards on right (exactly like design image 1)
-- **Mobile Layout**: Content on top, single card below (exactly like design image 2)
+- **Mobile Layout**: Single card on top, content below (exactly like design image 2)
 - **No navigation elements** (arrows/dots) - click/touch cards to navigate
 - **Blur effect** on inactive cards
 - **Touch/swipe support** on mobile
