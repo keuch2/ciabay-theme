@@ -674,7 +674,7 @@ jQuery(document).ready(function($) {
     }
     
     function updateDesktopCardPosition(card, slideIndex, isActive) {
-        // Apply dynamic positioning based on current active slide
+        // Apply side-by-side positioning for desktop (no 3D effects)
         if (isActive) {
             // Center position for active card
             card.css({
@@ -687,28 +687,26 @@ jQuery(document).ready(function($) {
                 'opacity': '1'
             });
         } else {
-            // Position inactive cards based on their relationship to active
-            const offset = slideIndex - currentSlide;
-            
-            if (offset === -1 || (currentSlide === 0 && slideIndex === 2)) {
-                // Left position
+            // Position inactive cards side by side
+            if (slideIndex === 0) {
+                // Left position (SERVICIOS)
                 card.css({
                     'left': '0',
                     'right': 'auto',
-                    'top': '40px',
-                    'transform': 'perspective(1000px) rotateY(15deg) scale(0.85)',
-                    'z-index': '1',
+                    'top': '0',
+                    'transform': 'scale(1)',
+                    'z-index': '5',
                     'filter': 'blur(2px)',
                     'opacity': '0.7'
                 });
-            } else if (offset === 1 || (currentSlide === 2 && slideIndex === 0)) {
-                // Right position
+            } else if (slideIndex === 2) {
+                // Right position (MÁQUINAS)
                 card.css({
                     'left': 'auto',
                     'right': '0',
-                    'top': '40px',
-                    'transform': 'perspective(1000px) rotateY(-15deg) scale(0.85)',
-                    'z-index': '1',
+                    'top': '0',
+                    'transform': 'scale(1)',
+                    'z-index': '5',
                     'filter': 'blur(2px)',
                     'opacity': '0.7'
                 });
