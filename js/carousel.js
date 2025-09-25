@@ -707,7 +707,7 @@ jQuery(document).ready(function($) {
                 'left': '50%',
                 'right': 'auto',
                 'top': '0',
-                'margin-left': '-85px' // Half of card width (170px/2)
+                'margin-left': '-110px' // Half of card width (220px/2)
             });
         } else if (slideIndex === 2) {
             // MÁQUINAS always on right

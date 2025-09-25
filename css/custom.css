@@ -1270,10 +1270,10 @@ header.ciabay-main-header {
 
 /* Content Panel (Left Side - Desktop) */
 .content-panel {
-    flex: 0 0 55%;
+    flex: 0 0 40%;
     padding: 60px 40px;
     color: white;
-    max-width: 55%;
+    max-width: 40%;
 }
 
 .main-content {
@@ -1312,7 +1312,7 @@ header.ciabay-main-header {
     position: relative;
     border: solid 1px #435a8b;
     border-radius: 8px;
-    padding: 40px;
+    padding: 20px;
 }
 
 .slide-content-panel {
@@ -1389,8 +1389,8 @@ header.ciabay-main-header {
 
 /* Cards Panel (Right Side - Desktop) */
 .cards-panel {
-    flex: 0 0 45%;
-    padding: 60px 20px;
+    flex: 0 0 60%;
+    padding: 60px 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1399,14 +1399,14 @@ header.ciabay-main-header {
 .cards-container {
     position: relative;
     width: 100%;
-    max-width: 550px;
-    height: 350px;
+    max-width: 700px;
+    height: 400px;
 }
 
 .carousel-card {
     position: absolute;
-    width: 170px;
-    height: 280px;
+    width: 220px;
+    height: 350px;
     border-radius: 20px;
     overflow: hidden;
     cursor: pointer;
@@ -1431,7 +1431,7 @@ header.ciabay-main-header {
     left: 50%;
     right: auto;
     top: 0;
-    margin-left: -85px; /* Half of card width (170px/2) */
+    margin-left: -110px; /* Half of card width (220px/2) */
     transform: scale(1.1);
     z-index: 10;
     filter: none;
