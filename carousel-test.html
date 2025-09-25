@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciabay Unified Carousel - Test</title>
+    <link rel="stylesheet" href="css/custom.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .test-info {
+            background: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #ddd;
+        }
+        .test-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+        .test-controls button {
+            margin: 5px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #007cba;
+            color: white;
+        }
+        .test-controls button:hover {
+            background: #005a87;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h1>🧪 Ciabay Unified Carousel - Testing Environment</h1>
+        <p><strong>Instrucciones:</strong> Prueba el carousel en diferentes tamaños de pantalla. Haz clic en las tarjetas para navegar.</p>
+        <p><strong>Desktop:</strong> Panel izquierdo + tarjetas derecha | <strong>Mobile:</strong> Contenido arriba + tarjeta abajo</p>
+    </div>
+    
+    <div class="test-controls">
+        <h4>🎮 Test Controls</h4>
+        <button onclick="window.ciabayUnifiedCarousel?.goToSlide(0)">→ SERVICIOS</button>
+        <button onclick="window.ciabayUnifiedCarousel?.goToSlide(1)">→ INSUMOS</button>
+        <button onclick="window.ciabayUnifiedCarousel?.goToSlide(2)">→ MÁQUINAS</button>
+        <br>
+        <button onclick="window.ciabayUnifiedCarousel?.prevSlide()">⬅ Anterior</button>
+        <button onclick="window.ciabayUnifiedCarousel?.nextSlide()">➡ Siguiente</button>
+        <br>
+        <small>Current: <span id="current-slide">1</span></small>
+    </div>
+
+    <!-- Unified Carousel HTML Structure -->
+    <div class="ciabay-unified-carousel" data-height="600px">
+        <!-- Desktop Layout -->
+        <div class="desktop-layout">
+            <!-- Content Panel (Left Side) -->
+            <div class="content-panel">
+                <div class="main-content">
+                    <h2 class="main-title">HOY EL CAMPO EXIGE MÁS</h2>
+                    <p class="main-subtitle">MÁS ROBUSTEZ, MÁS TECNOLOGÍA, MÁS PRECISIÓN, MÁS EFICIENCIA.</p>
+                    <p class="main-question">¿VOS ESTÁS LISTO?</p>
+                </div>
+                
+                <!-- Dynamic Content Area -->
+                <div class="dynamic-content">
+                    <div class="slide-content-panel" data-slide="0">
+                        <p class="slide-description">Servicios especializados para el campo con la más alta calidad y respaldo técnico.</p>
+                        <div class="slide-buttons">
+                            <a href="#" class="btn btn-primary">VER SERVICIOS</a>
+                            <a href="#" class="btn btn-secondary">CONTACTAR</a>
+                        </div>
+                    </div>
+                    <div class="slide-content-panel active" data-slide="1">
+                        <p class="slide-description">Semillas, protección y nutrición de marcas líderes con el respaldo CIABAY, para cultivos más sanos y rentables.</p>
+                        <div class="slide-buttons">
+                            <a href="#" class="btn btn-primary">VER PRODUCTOS</a>
+                            <a href="#" class="btn btn-secondary">VER POR CULTIVO</a>
+                        </div>
+                    </div>
+                    <div class="slide-content-panel" data-slide="2">
+                        <p class="slide-description">Maquinaria agrícola de última tecnología para maximizar la eficiencia y productividad.</p>
+                        <div class="slide-buttons">
+                            <a href="#" class="btn btn-primary">VER MÁQUINAS</a>
+                            <a href="#" class="btn btn-secondary">FINANCIACIÓN</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cards Panel (Right Side) -->
+            <div class="cards-panel">
+                <div class="cards-container">
+                    <div class="carousel-card" data-slide="0">
+                        <div class="card-image">
+                            <img src="assets/images/ejemplo.jpg" alt="Servicios" style="background: linear-gradient(45deg, #ff6b35, #f7931e);">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="card-title">SERVICIOS</h3>
+                        </div>
+                    </div>
+                    <div class="carousel-card active" data-slide="1">
+                        <div class="card-image">
+                            <img src="assets/images/ejemplo.jpg" alt="Insumos" style="background: linear-gradient(45deg, #4caf50, #8bc34a);">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <h3 class="card-title">INSUMOS</h3>
+                        </div>
+                    </div>
+                    <div class="carousel-card" data-slide="2">
+                        <div class="card-image">
+                            <img src="assets/images/ejemplo.jpg" alt="Máquinas" style="background: linear-gradient(45deg, #2196f3, #03a9f4);">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="card-title">MÁQUINAS</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Layout -->
+        <div class="mobile-layout">
+            <!-- Content Panel (Top) -->
+            <div class="mobile-content-panel">
+                <div class="main-content">
+                    <h2 class="main-title">HOY EL CAMPO EXIGE MÁS</h2>
+                    <p class="main-subtitle">MÁS ROBUSTEZ, MÁS TECNOLOGÍA, MÁS PRECISIÓN, MÁS EFICIENCIA.</p>
+                    <p class="main-question">¿VOS ESTÁS LISTO?</p>
+                </div>
+                
+                <!-- Dynamic Content for Mobile -->
+                <div class="mobile-dynamic-content">
+                    <div class="mobile-slide-content" data-slide="0">
+                        <p class="slide-description">Servicios especializados para el campo con la más alta calidad y respaldo técnico.</p>
+                        <div class="slide-buttons">
+                            <a href="#" class="btn btn-primary">VER SERVICIOS</a>
+                            <a href="#" class="btn btn-secondary">CONTACTAR</a>
+                        </div>
+                    </div>
+                    <div class="mobile-slide-content active" data-slide="1">
+                        <p class="slide-description">Semillas, protección y nutrición de marcas líderes con el respaldo CIABAY, para cultivos más sanos y rentables.</p>
+                        <div class="slide-buttons">
+                            <a href="#" class="btn btn-primary">VER PRODUCTOS</a>
+                            <a href="#" class="btn btn-secondary">VER POR CULTIVO</a>
+                        </div>
+                    </div>
+                    <div class="mobile-slide-content" data-slide="2">
+                        <p class="slide-description">Maquinaria agrícola de última tecnología para maximizar la eficiencia y productividad.</p>
+                        <div class="slide-buttons">
+                            <a href="#" class="btn btn-primary">VER MÁQUINAS</a>
+                            <a href="#" class="btn btn-secondary">FINANCIACIÓN</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Single Card (Bottom) -->
+            <div class="mobile-card-container">
+                <div class="mobile-carousel-card" data-slide="0">
+                    <div class="card-image">
+                        <img src="assets/images/ejemplo.jpg" alt="Servicios" style="background: linear-gradient(45deg, #ff6b35, #f7931e);">
+                    </div>
+                    <div class="card-overlay">
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">SERVICIOS</h3>
+                    </div>
+                </div>
+                <div class="mobile-carousel-card active" data-slide="1">
+                    <div class="card-image">
+                        <img src="assets/images/ejemplo.jpg" alt="Insumos" style="background: linear-gradient(45deg, #4caf50, #8bc34a);">
+                    </div>
+                    <div class="card-overlay">
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">INSUMOS</h3>
+                    </div>
+                </div>
+                <div class="mobile-carousel-card" data-slide="2">
+                    <div class="card-image">
+                        <img src="assets/images/ejemplo.jpg" alt="Máquinas" style="background: linear-gradient(45deg, #2196f3, #03a9f4);">
+                    </div>
+                    <div class="card-overlay">
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">MÁQUINAS</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/carousel.js"></script>
+    <script>
+        // Update current slide indicator
+        $(document).on('ciabayUnifiedCarouselChange', function(e, slideIndex) {
+            $('#current-slide').text(slideIndex);
+        });
+        
+        // Add fallback for broken images
+        $('img').on('error', function() {
+            $(this).parent().css({
+                'background': 'linear-gradient(45deg, #667eea, #764ba2)',
+                'display': 'flex',
+                'align-items': 'center',
+                'justify-content': 'center'
+            });
+            $(this).hide();
+            $(this).parent().append('<div style="color:white;font-size:14px;text-align:center;">Imagen de ejemplo</div>');
+        });
+    </script>
+</body>
+</html>
