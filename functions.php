@@ -61,12 +61,15 @@ add_action('after_setup_theme', 'ciabay_theme_setup');
 require_once get_stylesheet_directory() . '/carousel-admin.php';
 
 /**
- * Hero Carousel Shortcode with 3D Effect
+ * Unified Ciabay Carousel Shortcode
+ * Combines hero carousel and content in a single component
  */
-function ciabay_hero_carousel_shortcode($atts) {
+function ciabay_unified_carousel_shortcode($atts) {
     $atts = shortcode_atts(array(
-        'height' => '500px',
-        'autoplay' => 'true'
+        'height' => '600px',
+        'main_title' => 'HOY EL CAMPO EXIGE MÁS',
+        'main_subtitle' => 'MÁS ROBUSTEZ, MÁS TECNOLOGÍA, MÁS PRECISIÓN, MÁS EFICIENCIA.',
+        'main_question' => '¿VOS ESTÁS LISTO?'
     ), $atts);
     
     $slides_data = ciabay_get_carousel_slides();
@@ -75,7 +78,7 @@ function ciabay_hero_carousel_shortcode($atts) {
     if (empty($slides_data)) {
         $slides_data = array(
             array(
-                'id' => 1,
+                'id' => 0,
                 'title' => 'SERVICIOS',
                 'subtitle' => 'Servicios especializados para el campo',
                 'image' => get_stylesheet_directory_uri() . '/assets/images/ejemplo.jpg',
@@ -85,9 +88,9 @@ function ciabay_hero_carousel_shortcode($atts) {
                 'button2_url' => '#'
             ),
             array(
-                'id' => 2,
+                'id' => 1,
                 'title' => 'INSUMOS',
-                'subtitle' => 'Insumos de calidad para tu producción',
+                'subtitle' => 'Semillas, protección y nutrición de marcas líderes con el respaldo CIABAY, para cultivos más sanos y rentables.',
                 'image' => get_stylesheet_directory_uri() . '/assets/images/ejemplo.jpg',
                 'button1_text' => 'VER PRODUCTOS',
                 'button1_url' => '#',
@@ -95,7 +98,7 @@ function ciabay_hero_carousel_shortcode($atts) {
                 'button2_url' => '#'
             ),
             array(
-                'id' => 3,
+                'id' => 2,
                 'title' => 'MÁQUINAS',
                 'subtitle' => 'Maquinaria agrícola de última tecnología',
                 'image' => get_stylesheet_directory_uri() . '/assets/images/ejemplo.jpg',
@@ -109,110 +112,134 @@ function ciabay_hero_carousel_shortcode($atts) {
     
     ob_start();
     ?>
-    <div class="ciabay-hero-carousel" data-height="<?php echo esc_attr($atts['height']); ?>" data-autoplay="<?php echo esc_attr($atts['autoplay']); ?>">
-        <div class="carousel-container">
-            <div class="carousel-track">
-                <?php foreach ($slides_data as $index => $slide): ?>
-                <div class="carousel-slide <?php echo $index === 1 ? 'active main-slide' : ''; ?>" data-slide="<?php echo esc_attr($slide['id']); ?>">
-                    <div class="slide-content">
-                        <div class="slide-image">
+    <div class="ciabay-unified-carousel" data-height="<?php echo esc_attr($atts['height']); ?>">
+        <!-- Desktop Layout -->
+        <div class="desktop-layout">
+            <!-- Content Panel (Left Side) -->
+            <div class="content-panel">
+                <div class="main-content">
+                    <h2 class="main-title"><?php echo esc_html($atts['main_title']); ?></h2>
+                    <p class="main-subtitle"><?php echo esc_html($atts['main_subtitle']); ?></p>
+                    <p class="main-question"><?php echo esc_html($atts['main_question']); ?></p>
+                </div>
+                
+                <!-- Dynamic Content Area -->
+                <div class="dynamic-content">
+                    <?php foreach ($slides_data as $index => $slide): ?>
+                    <div class="slide-content-panel <?php echo $index === 1 ? 'active' : ''; ?>" data-slide="<?php echo $index; ?>">
+                        <p class="slide-description"><?php echo esc_html($slide['subtitle']); ?></p>
+                        <div class="slide-buttons">
+                            <?php if (!empty($slide['button1_text'])): ?>
+                            <a href="<?php echo esc_url($slide['button1_url']); ?>" class="btn btn-primary"><?php echo esc_html($slide['button1_text']); ?></a>
+                            <?php endif; ?>
+                            <?php if (!empty($slide['button2_text'])): ?>
+                            <a href="<?php echo esc_url($slide['button2_url']); ?>" class="btn btn-secondary"><?php echo esc_html($slide['button2_text']); ?></a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            
+            <!-- Cards Panel (Right Side) -->
+            <div class="cards-panel">
+                <div class="cards-container">
+                    <?php foreach ($slides_data as $index => $slide): ?>
+                    <div class="carousel-card <?php echo $index === 1 ? 'active' : ''; ?>" data-slide="<?php echo $index; ?>">
+                        <div class="card-image">
                             <img src="<?php echo esc_url($slide['image'] ?: get_stylesheet_directory_uri() . '/assets/images/ejemplo.jpg'); ?>" alt="<?php echo esc_attr($slide['title']); ?>">
                         </div>
-                        <div class="slide-overlay">
-                            <h3><?php echo esc_html($slide['title']); ?></h3>
+                        <div class="card-overlay">
+                            <div class="card-icon">
+                                <?php if ($slide['title'] === 'SERVICIOS'): ?>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                <?php elseif ($slide['title'] === 'INSUMOS'): ?>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                <?php else: ?>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                <?php endif; ?>
+                            </div>
+                            <h3 class="card-title"><?php echo esc_html($slide['title']); ?></h3>
                         </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Layout -->
+        <div class="mobile-layout">
+            <!-- Content Panel (Top) -->
+            <div class="mobile-content-panel">
+                <div class="main-content">
+                    <h2 class="main-title"><?php echo esc_html($atts['main_title']); ?></h2>
+                    <p class="main-subtitle"><?php echo esc_html($atts['main_subtitle']); ?></p>
+                    <p class="main-question"><?php echo esc_html($atts['main_question']); ?></p>
+                </div>
+                
+                <!-- Dynamic Content for Mobile -->
+                <div class="mobile-dynamic-content">
+                    <?php foreach ($slides_data as $index => $slide): ?>
+                    <div class="mobile-slide-content <?php echo $index === 1 ? 'active' : ''; ?>" data-slide="<?php echo $index; ?>">
+                        <p class="slide-description"><?php echo esc_html($slide['subtitle']); ?></p>
+                        <div class="slide-buttons">
+                            <?php if (!empty($slide['button1_text'])): ?>
+                            <a href="<?php echo esc_url($slide['button1_url']); ?>" class="btn btn-primary"><?php echo esc_html($slide['button1_text']); ?></a>
+                            <?php endif; ?>
+                            <?php if (!empty($slide['button2_text'])): ?>
+                            <a href="<?php echo esc_url($slide['button2_url']); ?>" class="btn btn-secondary"><?php echo esc_html($slide['button2_text']); ?></a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            
+            <!-- Single Card (Bottom) -->
+            <div class="mobile-card-container">
+                <?php foreach ($slides_data as $index => $slide): ?>
+                <div class="mobile-carousel-card <?php echo $index === 1 ? 'active' : ''; ?>" data-slide="<?php echo $index; ?>">
+                    <div class="card-image">
+                        <img src="<?php echo esc_url($slide['image'] ?: get_stylesheet_directory_uri() . '/assets/images/ejemplo.jpg'); ?>" alt="<?php echo esc_attr($slide['title']); ?>">
+                    </div>
+                    <div class="card-overlay">
+                        <div class="card-icon">
+                            <?php if ($slide['title'] === 'SERVICIOS'): ?>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            <?php elseif ($slide['title'] === 'INSUMOS'): ?>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            <?php else: ?>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            <?php endif; ?>
+                        </div>
+                        <h3 class="card-title"><?php echo esc_html($slide['title']); ?></h3>
                     </div>
                 </div>
                 <?php endforeach; ?>
             </div>
         </div>
-        
-        <!-- Navigation -->
-        <div class="carousel-navigation">
-            <button class="nav-btn prev-btn">&lt;</button>
-            <button class="nav-btn next-btn">&gt;</button>
-        </div>
-        
-        <!-- Dots -->
-        <div class="carousel-dots">
-            <?php foreach ($slides_data as $index => $slide): ?>
-            <span class="dot <?php echo $index === 1 ? 'active' : ''; ?>" data-slide="<?php echo $index; ?>"></span>
-            <?php endforeach; ?>
-        </div>
     </div>
     
     <!-- Pass slides data to JavaScript -->
     <script type="text/javascript">
-        window.ciabayCarouselData = <?php echo json_encode($slides_data); ?>;
+        window.ciabayUnifiedCarouselData = <?php echo json_encode($slides_data); ?>;
     </script>
     <?php
     return ob_get_clean();
 }
-add_shortcode('ciabay_hero_carousel', 'ciabay_hero_carousel_shortcode');
-
-/**
- * Simple Content Carousel Shortcode (linked to 3D carousel)
- */
-function ciabay_content_carousel_shortcode($atts) {
-    $atts = shortcode_atts(array(
-        'background_color' => '#1e3a8a'
-    ), $atts);
-    
-    $slides_data = ciabay_get_carousel_slides();
-    
-    // Fallback slides if no custom slides exist
-    if (empty($slides_data)) {
-        $slides_data = array(
-            array(
-                'title' => 'SERVICIOS',
-                'subtitle' => 'Servicios especializados para el campo',
-                'button1_text' => 'VER SERVICIOS',
-                'button1_url' => '#',
-                'button2_text' => 'CONTACTAR',
-                'button2_url' => '#'
-            ),
-            array(
-                'title' => 'INSUMOS',
-                'subtitle' => 'Semillas, protección y nutrición de marcas líderes con el respaldo CIABAY, para cultivos más sanos y rentables.',
-                'button1_text' => 'VER PRODUCTOS',
-                'button1_url' => '#',
-                'button2_text' => 'VER POR CULTIVO',
-                'button2_url' => '#'
-            ),
-            array(
-                'title' => 'MÁQUINAS',
-                'subtitle' => 'Maquinaria agrícola de última tecnología',
-                'button1_text' => 'VER MÁQUINAS',
-                'button1_url' => '#',
-                'button2_text' => 'FINANCIACIÓN',
-                'button2_url' => '#'
-            )
-        );
-    }
-    
-    ob_start();
-    ?>
-    <div class="ciabay-content-carousel">
-        <div class="container">
-            <?php foreach ($slides_data as $index => $slide): ?>
-            <div class="content-slide <?php echo $index === 1 ? 'active' : ''; ?>" data-slide="<?php echo $index; ?>">
-                <p class="slide-subtitle"><?php echo esc_html($slide['subtitle']); ?></p>
-                <div class="slide-buttons">
-                    <?php if (!empty($slide['button1_text'])): ?>
-                    <a href="<?php echo esc_url($slide['button1_url']); ?>" class="btn btn-primary"><?php echo esc_html($slide['button1_text']); ?></a>
-                    <?php endif; ?>
-                    <?php if (!empty($slide['button2_text'])): ?>
-                    <a href="<?php echo esc_url($slide['button2_url']); ?>" class="btn btn-secondary"><?php echo esc_html($slide['button2_text']); ?></a>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-    <?php
-    return ob_get_clean();
-}
-add_shortcode('ciabay_content_carousel', 'ciabay_content_carousel_shortcode');
+add_shortcode('ciabay_carousel', 'ciabay_unified_carousel_shortcode');
 
 /**
  * Video Section Shortcode

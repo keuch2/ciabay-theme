@@ -519,4 +519,236 @@ jQuery(document).ready(function($) {
             '}' +
         '</style>').appendTo('head');
     }
+    
+    // Initialize unified carousel
+    initUnifiedCarousel();
+    
+    /**
+     * Unified Ciabay Carousel - New Implementation
+     */
+    function initUnifiedCarousel() {
+    const carousel = $('.ciabay-unified-carousel');
+    if (carousel.length === 0) return;
+    
+    let currentSlide = 1; // Start with INSUMOS (middle slide)
+    let isAnimating = false;
+    
+    const desktopCards = $('.carousel-card');
+    const mobileCards = $('.mobile-carousel-card');
+    const contentPanels = $('.slide-content-panel');
+    const mobileContentPanels = $('.mobile-slide-content');
+    
+    // Initialize carousel state
+    updateCarouselState();
+    
+    // Desktop card click events
+    desktopCards.on('click', function(e) {
+        e.preventDefault();
+        if (isAnimating) return;
+        
+        const targetSlide = parseInt($(this).data('slide'));
+        if (targetSlide !== currentSlide) {
+            currentSlide = targetSlide;
+            updateCarouselState();
+        }
+    });
+    
+    // Mobile card click events
+    mobileCards.on('click', function(e) {
+        e.preventDefault();
+        if (isAnimating) return;
+        
+        const targetSlide = parseInt($(this).data('slide'));
+        if (targetSlide !== currentSlide) {
+            currentSlide = targetSlide;
+            updateCarouselState();
+        }
+    });
+    
+    // Touch/swipe support for mobile cards
+    let startX = 0;
+    let endX = 0;
+    
+    $('.mobile-card-container').on('touchstart', function(e) {
+        startX = e.originalEvent.touches[0].clientX;
+    });
+    
+    $('.mobile-card-container').on('touchend', function(e) {
+        endX = e.originalEvent.changedTouches[0].clientX;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        const threshold = 50;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > threshold && !isAnimating) {
+            if (diff > 0) {
+                // Swipe left - next slide
+                currentSlide = (currentSlide + 1) % 3;
+            } else {
+                // Swipe right - previous slide
+                currentSlide = (currentSlide - 1 + 3) % 3;
+            }
+            updateCarouselState();
+        }
+    }
+    
+    // Keyboard navigation
+    $(document).off('keydown.unifiedCarousel').on('keydown.unifiedCarousel', function(e) {
+        if (!carousel.is(':visible') || isAnimating) return;
+        
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            currentSlide = (currentSlide - 1 + 3) % 3;
+            updateCarouselState();
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            currentSlide = (currentSlide + 1) % 3;
+            updateCarouselState();
+        }
+    });
+    
+    function updateCarouselState() {
+        isAnimating = true;
+        
+        // Update desktop cards
+        desktopCards.each(function(index) {
+            const card = $(this);
+            const slideIndex = parseInt(card.data('slide'));
+            
+            if (slideIndex === currentSlide) {
+                card.addClass('active');
+                updateDesktopCardPosition(card, slideIndex, true);
+            } else {
+                card.removeClass('active');
+                updateDesktopCardPosition(card, slideIndex, false);
+            }
+        });
+        
+        // Update mobile cards
+        mobileCards.each(function(index) {
+            const card = $(this);
+            const slideIndex = parseInt(card.data('slide'));
+            
+            if (slideIndex === currentSlide) {
+                card.addClass('active');
+            } else {
+                card.removeClass('active');
+            }
+        });
+        
+        // Update content panels (desktop)
+        contentPanels.each(function(index) {
+            const panel = $(this);
+            const slideIndex = parseInt(panel.data('slide'));
+            
+            if (slideIndex === currentSlide) {
+                panel.addClass('active');
+            } else {
+                panel.removeClass('active');
+            }
+        });
+        
+        // Update mobile content panels
+        mobileContentPanels.each(function(index) {
+            const panel = $(this);
+            const slideIndex = parseInt(panel.data('slide'));
+            
+            if (slideIndex === currentSlide) {
+                panel.addClass('active');
+            } else {
+                panel.removeClass('active');
+            }
+        });
+        
+        // Trigger custom event
+        $(document).trigger('ciabayUnifiedCarouselChange', [currentSlide]);
+        
+        // Reset animation flag
+        setTimeout(function() {
+            isAnimating = false;
+        }, 600);
+    }
+    
+    function updateDesktopCardPosition(card, slideIndex, isActive) {
+        // Apply dynamic positioning based on current active slide
+        if (isActive) {
+            // Center position for active card
+            card.css({
+                'left': '50%',
+                'right': 'auto',
+                'top': '0',
+                'transform': 'translateX(-50%) scale(1)',
+                'z-index': '10',
+                'filter': 'none',
+                'opacity': '1'
+            });
+        } else {
+            // Position inactive cards based on their relationship to active
+            const offset = slideIndex - currentSlide;
+            
+            if (offset === -1 || (currentSlide === 0 && slideIndex === 2)) {
+                // Left position
+                card.css({
+                    'left': '0',
+                    'right': 'auto',
+                    'top': '40px',
+                    'transform': 'perspective(1000px) rotateY(15deg) scale(0.85)',
+                    'z-index': '1',
+                    'filter': 'blur(2px)',
+                    'opacity': '0.7'
+                });
+            } else if (offset === 1 || (currentSlide === 2 && slideIndex === 0)) {
+                // Right position
+                card.css({
+                    'left': 'auto',
+                    'right': '0',
+                    'top': '40px',
+                    'transform': 'perspective(1000px) rotateY(-15deg) scale(0.85)',
+                    'z-index': '1',
+                    'filter': 'blur(2px)',
+                    'opacity': '0.7'
+                });
+            }
+        }
+    }
+    
+    // Handle window resize
+    $(window).off('resize.unifiedCarousel').on('resize.unifiedCarousel', function() {
+        // Recalculate positions on resize
+        setTimeout(updateCarouselState, 100);
+    });
+    
+    // Expose API for external control
+    window.ciabayUnifiedCarousel = {
+        goToSlide: function(slideIndex) {
+            if (slideIndex >= 0 && slideIndex < 3 && slideIndex !== currentSlide && !isAnimating) {
+                currentSlide = slideIndex;
+                updateCarouselState();
+                return true;
+            }
+            return false;
+        },
+        getCurrentSlide: function() {
+            return currentSlide;
+        },
+        nextSlide: function() {
+            if (!isAnimating) {
+                currentSlide = (currentSlide + 1) % 3;
+                updateCarouselState();
+                return true;
+            }
+            return false;
+        },
+        prevSlide: function() {
+            if (!isAnimating) {
+                currentSlide = (currentSlide - 1 + 3) % 3;
+                updateCarouselState();
+                return true;
+            }
+            return false;
+        }
+    };
+    }
 });

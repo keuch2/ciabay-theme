@@ -1242,3 +1242,430 @@ header.ciabay-main-header {
         max-width: 250px;
     }
 }
+
+/* ===========================================
+   UNIFIED CIABAY CAROUSEL - NEW DESIGN
+   =========================================== */
+
+/* Unified Ciabay Carousel */
+.ciabay-unified-carousel {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    overflow: hidden;
+}
+
+/* Desktop Layout */
+.desktop-layout {
+    display: flex;
+    min-height: 600px;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .desktop-layout {
+        display: none;
+    }
+}
+
+/* Content Panel (Left Side - Desktop) */
+.content-panel {
+    flex: 1;
+    padding: 60px 40px;
+    color: white;
+    max-width: 50%;
+}
+
+.main-content {
+    margin-bottom: 40px;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.main-subtitle {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    margin: 0 0 20px 0;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.main-question {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 40px 0;
+    color: #FFD700;
+}
+
+/* Dynamic Content Area */
+.dynamic-content {
+    position: relative;
+}
+
+.slide-content-panel {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+}
+
+.slide-content-panel.active {
+    opacity: 1;
+    transform: translateY(0);
+    position: relative;
+    pointer-events: auto;
+}
+
+.slide-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 30px 0;
+    opacity: 0.95;
+}
+
+.slide-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.ciabay-unified-carousel .btn {
+    padding: 12px 24px;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ciabay-unified-carousel .btn-primary {
+    background: white;
+    color: #1e3c72;
+}
+
+.ciabay-unified-carousel .btn-primary:hover {
+    background: transparent;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.ciabay-unified-carousel .btn-secondary {
+    background: transparent;
+    color: white;
+    border-color: rgba(255,255,255,0.8);
+}
+
+.ciabay-unified-carousel .btn-secondary:hover {
+    background: white;
+    color: #1e3c72;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Cards Panel (Right Side - Desktop) */
+.cards-panel {
+    flex: 1;
+    padding: 60px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cards-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 400px;
+}
+
+.carousel-card {
+    position: absolute;
+    width: 280px;
+    height: 350px;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* Card positioning for desktop - exactly like image 1 */
+.carousel-card[data-slide="0"] {
+    /* SERVICIOS - Left */
+    left: 0;
+    top: 40px;
+    z-index: 1;
+    transform: perspective(1000px) rotateY(15deg) scale(0.85);
+    filter: blur(2px);
+    opacity: 0.7;
+}
+
+.carousel-card[data-slide="1"] {
+    /* INSUMOS - Center (Active) */
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%) scale(1);
+    z-index: 10;
+    filter: none;
+    opacity: 1;
+}
+
+.carousel-card[data-slide="2"] {
+    /* MÁQUINAS - Right */
+    right: 0;
+    top: 40px;
+    z-index: 1;
+    transform: perspective(1000px) rotateY(-15deg) scale(0.85);
+    filter: blur(2px);
+    opacity: 0.7;
+}
+
+/* Active states */
+.carousel-card.active {
+    filter: none !important;
+    opacity: 1 !important;
+    z-index: 10 !important;
+}
+
+.carousel-card:not(.active) {
+    filter: blur(2px);
+    opacity: 0.7;
+}
+
+.carousel-card:hover:not(.active) {
+    filter: blur(1px);
+    opacity: 0.9;
+    transform: scale(0.9);
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 25px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-icon {
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.card-icon svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Mobile Layout */
+.mobile-layout {
+    display: none;
+    padding: 40px 20px;
+    color: white;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .mobile-layout {
+        display: block;
+    }
+    
+    .ciabay-unified-carousel {
+        min-height: auto;
+    }
+}
+
+/* Mobile Content Panel */
+.mobile-content-panel {
+    margin-bottom: 40px;
+}
+
+.mobile-content-panel .main-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.mobile-content-panel .main-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+.mobile-content-panel .main-question {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+/* Mobile Dynamic Content */
+.mobile-dynamic-content {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.mobile-slide-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+}
+
+.mobile-slide-content.active {
+    opacity: 1;
+    transform: translateY(0);
+    position: relative;
+    pointer-events: auto;
+}
+
+.mobile-slide-content .slide-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    opacity: 0.95;
+}
+
+.mobile-slide-content .slide-buttons {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.mobile-slide-content .btn {
+    width: 100%;
+    max-width: 250px;
+    padding: 14px 20px;
+    font-size: 13px;
+}
+
+/* Mobile Card Container */
+.mobile-card-container {
+    position: relative;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-carousel-card {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.6s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+.mobile-carousel-card.active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+/* Responsive fine-tuning */
+@media (max-width: 480px) {
+    .content-panel {
+        padding: 40px 20px;
+    }
+    
+    .main-title {
+        font-size: 2rem;
+    }
+    
+    .cards-container {
+        max-width: 400px;
+        height: 350px;
+    }
+    
+    .carousel-card {
+        width: 240px;
+        height: 300px;
+    }
+    
+    .mobile-carousel-card {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+/* Performance optimizations */
+.ciabay-unified-carousel * {
+    will-change: transform, opacity, filter;
+}
+
+.carousel-card,
+.mobile-carousel-card {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+/* Focus states for accessibility */
+.carousel-card:focus,
+.mobile-carousel-card:focus {
+    outline: 3px solid #FFD700;
+    outline-offset: 2px;
+}
+
+.ciabay-unified-carousel .btn:focus {
+    outline: 2px solid #FFD700;
+    outline-offset: 2px;
+}

@@ -4,22 +4,32 @@ This document explains how to use the custom shortcodes created for the Ciabay w
 
 ## Available Shortcodes
 
-### 1. Hero Carousel with 3D Effect
+### 1. Unified Carousel (NEW)
 ```
-[ciabay_hero_carousel height="500px" autoplay="true"]
+[ciabay_carousel height="600px" main_title="HOY EL CAMPO EXIGE MÁS" main_subtitle="MÁS ROBUSTEZ, MÁS TECNOLOGÍA, MÁS PRECISIÓN, MÁS EFICIENCIA." main_question="¿VOS ESTÁS LISTO?"]
 ```
 
 **Parameters:**
-- `height` (optional): Height of the carousel (default: 500px)
-- `autoplay` (optional): Enable autoplay (default: true)
+- `height` (optional): Height of the carousel (default: 600px)
+- `main_title` (optional): Main header title
+- `main_subtitle` (optional): Subtitle text
+- `main_question` (optional): Call to action question
 
 **Features:**
-- 3D carousel effect on desktop
-- Single slide view on mobile
-- Touch/swipe support
-- Auto-play functionality
-- Navigation arrows and dots
-- Responsive design
+- **Desktop Layout**: Content panel on left, cards on right (exactly like design image 1)
+- **Mobile Layout**: Content on top, single card below (exactly like design image 2)
+- **No navigation elements** (arrows/dots) - click/touch cards to navigate
+- **Blur effect** on inactive cards
+- **Touch/swipe support** on mobile
+- **Keyboard navigation** (arrow keys)
+- **Responsive design** with separate desktop/mobile layouts
+- **Performance optimized** with CSS transforms and blur filters
+
+### 2. Legacy Hero Carousel (DEPRECATED)
+```
+[ciabay_hero_carousel height="500px" autoplay="true"]
+```
+*Note: This shortcode is deprecated. Use [ciabay_carousel] instead.*
 
 ### 2. Main Content Header
 ```
