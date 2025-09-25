@@ -1,0 +1,14 @@
+/*
+Theme Name: Ciabay Divi
+Description: Child theme of Divi for Ciabay website
+Author: Ciabay Team
+Template: Divi
+Version: 1.0.0
+Text Domain: ciabay-divi
+*/
+
+/* Import parent theme styles */
+@import url("../Divi/style.css");
+
+/* Custom styles for Ciabay Divi child theme */
+/* Add your custom CSS below this line */
