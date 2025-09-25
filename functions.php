@@ -175,29 +175,12 @@ function ciabay_unified_carousel_shortcode($atts) {
         
         <!-- Mobile Layout -->
         <div class="mobile-layout">
-            <!-- Content Panel (Bottom) -->
+            <!-- Main Content Panel (Top) -->
             <div class="mobile-content-panel">
                 <div class="main-content">
                     <h2 class="main-title"><?php echo esc_html($atts['main_title']); ?></h2>
                     <p class="main-subtitle"><?php echo esc_html($atts['main_subtitle']); ?></p>
                     <p class="main-question"><?php echo esc_html($atts['main_question']); ?></p>
-                </div>
-                
-                <!-- Dynamic Content for Mobile -->
-                <div class="mobile-dynamic-content">
-                    <?php foreach ($slides_data as $index => $slide): ?>
-                    <div class="mobile-slide-content <?php echo $index === 1 ? 'active' : ''; ?>" data-slide="<?php echo $index; ?>">
-                        <p class="slide-description"><?php echo esc_html($slide['subtitle']); ?></p>
-                        <div class="slide-buttons">
-                            <?php if (!empty($slide['button1_text'])): ?>
-                            <a href="<?php echo esc_url($slide['button1_url']); ?>" class="btn btn-primary"><?php echo esc_html($slide['button1_text']); ?></a>
-                            <?php endif; ?>
-                            <?php if (!empty($slide['button2_text'])): ?>
-                            <a href="<?php echo esc_url($slide['button2_url']); ?>" class="btn btn-secondary"><?php echo esc_html($slide['button2_text']); ?></a>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
                 </div>
             </div>
             
@@ -225,6 +208,23 @@ function ciabay_unified_carousel_shortcode($atts) {
                             <?php endif; ?>
                         </div>
                         <h3 class="card-title"><?php echo esc_html($slide['title']); ?></h3>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            
+            <!-- Dynamic Content for Mobile (Bottom) -->
+            <div class="mobile-dynamic-content">
+                <?php foreach ($slides_data as $index => $slide): ?>
+                <div class="mobile-slide-content <?php echo $index === 1 ? 'active' : ''; ?>" data-slide="<?php echo $index; ?>">
+                    <p class="slide-description"><?php echo esc_html($slide['subtitle']); ?></p>
+                    <div class="slide-buttons">
+                        <?php if (!empty($slide['button1_text'])): ?>
+                        <a href="<?php echo esc_url($slide['button1_url']); ?>" class="btn btn-primary"><?php echo esc_html($slide['button1_text']); ?></a>
+                        <?php endif; ?>
+                        <?php if (!empty($slide['button2_text'])): ?>
+                        <a href="<?php echo esc_url($slide['button2_url']); ?>" class="btn btn-secondary"><?php echo esc_html($slide['button2_text']); ?></a>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <?php endforeach; ?>

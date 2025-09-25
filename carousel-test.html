@@ -45,7 +45,7 @@
     <div class="test-info">
         <h1>🧪 Ciabay Unified Carousel - Testing Environment</h1>
         <p><strong>Instrucciones:</strong> Prueba el carousel en diferentes tamaños de pantalla. Haz clic en las tarjetas para navegar.</p>
-        <p><strong>Desktop:</strong> Panel izquierdo + tarjetas derecha | <strong>Mobile:</strong> Tarjeta arriba + contenido abajo</p>
+        <p><strong>Desktop:</strong> Panel izquierdo + tarjetas derecha | <strong>Mobile:</strong> Contenido arriba + 3 tarjetas (centro activa) + descripción abajo</p>
     </div>
     
     <div class="test-controls">
@@ -146,41 +146,16 @@
         
         <!-- Mobile Layout -->
         <div class="mobile-layout">
-            <!-- Content Panel (Top) -->
+            <!-- Main Content Panel (Top) -->
             <div class="mobile-content-panel">
                 <div class="main-content">
                     <h2 class="main-title">HOY EL CAMPO EXIGE MÁS</h2>
                     <p class="main-subtitle">MÁS ROBUSTEZ, MÁS TECNOLOGÍA, MÁS PRECISIÓN, MÁS EFICIENCIA.</p>
                     <p class="main-question">¿VOS ESTÁS LISTO?</p>
                 </div>
-                
-                <!-- Dynamic Content for Mobile -->
-                <div class="mobile-dynamic-content">
-                    <div class="mobile-slide-content" data-slide="0">
-                        <p class="slide-description">Servicios especializados para el campo con la más alta calidad y respaldo técnico.</p>
-                        <div class="slide-buttons">
-                            <a href="#" class="btn btn-primary">VER SERVICIOS</a>
-                            <a href="#" class="btn btn-secondary">CONTACTAR</a>
-                        </div>
-                    </div>
-                    <div class="mobile-slide-content active" data-slide="1">
-                        <p class="slide-description">Semillas, protección y nutrición de marcas líderes con el respaldo CIABAY, para cultivos más sanos y rentables.</p>
-                        <div class="slide-buttons">
-                            <a href="#" class="btn btn-primary">VER PRODUCTOS</a>
-                            <a href="#" class="btn btn-secondary">VER POR CULTIVO</a>
-                        </div>
-                    </div>
-                    <div class="mobile-slide-content" data-slide="2">
-                        <p class="slide-description">Maquinaria agrícola de última tecnología para maximizar la eficiencia y productividad.</p>
-                        <div class="slide-buttons">
-                            <a href="#" class="btn btn-primary">VER MÁQUINAS</a>
-                            <a href="#" class="btn btn-secondary">FINANCIACIÓN</a>
-                        </div>
-                    </div>
-                </div>
             </div>
             
-            <!-- Single Card (Bottom) -->
+            <!-- Three Cards (Middle) -->
             <div class="mobile-card-container">
                 <div class="mobile-carousel-card" data-slide="0">
                     <div class="card-image">
@@ -219,6 +194,31 @@
                             </svg>
                         </div>
                         <h3 class="card-title">MÁQUINAS</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dynamic Content for Mobile (Bottom) -->
+            <div class="mobile-dynamic-content">
+                <div class="mobile-slide-content" data-slide="0">
+                    <p class="slide-description">Servicios especializados para el campo con la más alta calidad y respaldo técnico.</p>
+                    <div class="slide-buttons">
+                        <a href="#" class="btn btn-primary">VER SERVICIOS</a>
+                        <a href="#" class="btn btn-secondary">CONTACTAR</a>
+                    </div>
+                </div>
+                <div class="mobile-slide-content active" data-slide="1">
+                    <p class="slide-description">Semillas, protección y nutrición de marcas líderes con el respaldo CIABAY, para cultivos más sanos y rentables.</p>
+                    <div class="slide-buttons">
+                        <a href="#" class="btn btn-primary">VER PRODUCTOS</a>
+                        <a href="#" class="btn btn-secondary">VER POR CULTIVO</a>
+                    </div>
+                </div>
+                <div class="mobile-slide-content" data-slide="2">
+                    <p class="slide-description">Maquinaria agrícola de última tecnología para maximizar la eficiencia y productividad.</p>
+                    <div class="slide-buttons">
+                        <a href="#" class="btn btn-primary">VER MÁQUINAS</a>
+                        <a href="#" class="btn btn-secondary">FINANCIACIÓN</a>
                     </div>
                 </div>
             </div>

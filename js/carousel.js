@@ -633,8 +633,10 @@ jQuery(document).ready(function($) {
             
             if (slideIndex === currentSlide) {
                 card.addClass('active');
+                updateMobileCardPosition(card, slideIndex, true);
             } else {
                 card.removeClass('active');
+                updateMobileCardPosition(card, slideIndex, false);
             }
         });
         
@@ -709,6 +711,46 @@ jQuery(document).ready(function($) {
                     'z-index': '1',
                     'filter': 'blur(2px)',
                     'opacity': '0.7'
+                });
+            }
+        }
+    }
+    
+    function updateMobileCardPosition(card, slideIndex, isActive) {
+        // Apply dynamic positioning for mobile cards
+        if (isActive) {
+            // Center position for active card
+            card.css({
+                'left': '50%',
+                'right': 'auto',
+                'transform': 'translateX(-50%) scale(1)',
+                'z-index': '10',
+                'filter': 'none',
+                'opacity': '1'
+            });
+        } else {
+            // Position inactive cards based on their relationship to active
+            const offset = slideIndex - currentSlide;
+            
+            if (offset === -1 || (currentSlide === 0 && slideIndex === 2)) {
+                // Left position
+                card.css({
+                    'left': '-60px',
+                    'right': 'auto',
+                    'transform': 'scale(0.8)',
+                    'z-index': '1',
+                    'filter': 'blur(1px)',
+                    'opacity': '0.6'
+                });
+            } else if (offset === 1 || (currentSlide === 2 && slideIndex === 0)) {
+                // Right position
+                card.css({
+                    'left': 'auto',
+                    'right': '-60px',
+                    'transform': 'scale(0.8)',
+                    'z-index': '1',
+                    'filter': 'blur(1px)',
+                    'opacity': '0.6'
                 });
             }
         }

@@ -1530,13 +1530,19 @@ header.ciabay-main-header {
 
 /* Mobile Content Panel */
 .mobile-content-panel {
-    order: 2;
-    margin-top: 40px;
+    order: 1;
+    margin-bottom: 40px;
 }
 
-/* Mobile Card Container - Move to top */
+/* Mobile Card Container */
 .mobile-card-container {
-    order: 1;
+    order: 2;
+}
+
+/* Mobile Dynamic Content - Move to bottom */
+.mobile-dynamic-content {
+    order: 3;
+    margin-top: 40px;
 }
 
 .mobile-content-panel .main-title {
@@ -1602,30 +1608,67 @@ header.ciabay-main-header {
 /* Mobile Card Container */
 .mobile-card-container {
     position: relative;
-    height: 300px;
+    height: 320px;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    padding: 0 40px;
 }
 
 .mobile-carousel-card {
     position: absolute;
-    width: 280px;
+    width: 240px;
     height: 280px;
     border-radius: 20px;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.6s ease;
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    opacity: 0;
-    transform: scale(0.8);
-    pointer-events: none;
+    pointer-events: auto;
 }
 
-.mobile-carousel-card.active {
+/* Mobile Card Positioning - Show all 3 */
+.mobile-carousel-card[data-slide="0"] {
+    /* Left card */
+    left: -60px;
+    z-index: 1;
+    transform: scale(0.8);
+    opacity: 0.6;
+    filter: blur(1px);
+}
+
+.mobile-carousel-card[data-slide="1"] {
+    /* Center card (active) */
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    z-index: 10;
     opacity: 1;
-    transform: scale(1);
-    pointer-events: auto;
+    filter: none;
+}
+
+.mobile-carousel-card[data-slide="2"] {
+    /* Right card */
+    right: -60px;
+    z-index: 1;
+    transform: scale(0.8);
+    opacity: 0.6;
+    filter: blur(1px);
+}
+
+/* Active state updates for mobile */
+.mobile-carousel-card.active {
+    opacity: 1 !important;
+    transform: translateX(-50%) scale(1) !important;
+    z-index: 10 !important;
+    filter: none !important;
+    left: 50% !important;
+    right: auto !important;
+}
+
+.mobile-carousel-card:not(.active) {
+    opacity: 0.6;
+    filter: blur(1px);
 }
 
 /* Responsive fine-tuning */
