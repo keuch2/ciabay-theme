@@ -1252,7 +1252,6 @@ header.ciabay-main-header {
     position: relative;
     width: 100%;
     min-height: 600px;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     overflow: hidden;
 }
 
@@ -1271,43 +1270,49 @@ header.ciabay-main-header {
 
 /* Content Panel (Left Side - Desktop) */
 .content-panel {
-    flex: 1;
+    flex: 0 0 40%;
     padding: 60px 40px;
     color: white;
-    max-width: 50%;
+    max-width: 40%;
 }
 
 .main-content {
     margin-bottom: 40px;
+    border: solid 1px #435a8b;
+    border-radius: 8px;
+    padding: 40px;
 }
 
 .main-title {
-    font-size: 2.5rem;
+    font-size: 32px;
     font-weight: 800;
     line-height: 1.2;
-    margin: 0 0 20px 0;
     text-transform: uppercase;
     letter-spacing: 1px;
+    color:#fff;
 }
 
 .main-subtitle {
-    font-size: 1.1rem;
+    font-size: 16px;
     line-height: 1.4;
-    margin: 0 0 20px 0;
+    margin: 0 0 0px 0;
     opacity: 0.9;
     font-weight: 500;
 }
 
 .main-question {
-    font-size: 1.3rem;
+    font-size: 16px;
     font-weight: 700;
-    margin: 0 0 40px 0;
-    color: #FFD700;
+    margin: 0;
+    color: #FFf;
 }
 
 /* Dynamic Content Area */
 .dynamic-content {
     position: relative;
+    border: solid 1px #435a8b;
+    border-radius: 8px;
+    padding: 40px;
 }
 
 .slide-content-panel {
@@ -1333,10 +1338,11 @@ header.ciabay-main-header {
     line-height: 1.6;
     margin: 0 0 30px 0;
     opacity: 0.95;
+    text-align: left;
 }
 
 .slide-buttons {
-    display: flex;
+    display: block;
     gap: 15px;
     flex-wrap: wrap;
 }
@@ -1383,7 +1389,7 @@ header.ciabay-main-header {
 
 /* Cards Panel (Right Side - Desktop) */
 .cards-panel {
-    flex: 1;
+    flex: 0 0 60%;
     padding: 60px 40px;
     display: flex;
     align-items: center;
@@ -1393,14 +1399,14 @@ header.ciabay-main-header {
 .cards-container {
     position: relative;
     width: 100%;
-    max-width: 600px;
-    height: 320px;
+    max-width: 700px;
+    height: 380px;
 }
 
 .carousel-card {
     position: absolute;
-    width: 180px;
-    height: 280px;
+    width: 220px;
+    height: 330px;
     border-radius: 20px;
     overflow: hidden;
     cursor: pointer;
@@ -1408,10 +1414,11 @@ header.ciabay-main-header {
     box-shadow: 0 15px 35px rgba(0,0,0,0.3);
 }
 
-/* Card positioning for desktop - side by side layout */
+/* Card positioning for desktop - fixed positions */
 .carousel-card[data-slide="0"] {
-    /* SERVICIOS - Left */
+    /* SERVICIOS - Left (fixed) */
     left: 0;
+    right: auto;
     top: 0;
     z-index: 5;
     transform: scale(1);
@@ -1420,17 +1427,20 @@ header.ciabay-main-header {
 }
 
 .carousel-card[data-slide="1"] {
-    /* INSUMOS - Center (Active) */
+    /* INSUMOS - Center (fixed) */
     left: 50%;
+    right: auto;
     top: 0;
-    transform: translateX(-50%) scale(1);
+    margin-left: -110px; /* Half of card width (220px/2) */
+    transform: scale(1.1);
     z-index: 10;
     filter: none;
     opacity: 1;
 }
 
 .carousel-card[data-slide="2"] {
-    /* MÁQUINAS - Right */
+    /* MÁQUINAS - Right (fixed) */
+    left: auto;
     right: 0;
     top: 0;
     z-index: 5;
@@ -1439,22 +1449,24 @@ header.ciabay-main-header {
     opacity: 0.7;
 }
 
-/* Active states */
+/* Active states - only scale and effects, no position changes */
 .carousel-card.active {
     filter: none !important;
     opacity: 1 !important;
     z-index: 10 !important;
+    transform: scale(1.1) !important;
 }
 
 .carousel-card:not(.active) {
     filter: blur(2px);
     opacity: 0.7;
+    transform: scale(1) !important;
 }
 
 .carousel-card:hover:not(.active) {
     filter: blur(1px);
     opacity: 0.9;
-    transform: scale(1.05);
+    transform: scale(1.05) !important;
 }
 
 .card-image {

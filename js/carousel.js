@@ -674,43 +674,48 @@ jQuery(document).ready(function($) {
     }
     
     function updateDesktopCardPosition(card, slideIndex, isActive) {
-        // Apply side-by-side positioning for desktop (no 3D effects)
+        // Apply fixed positioning - cards don't move, only scale and blur
         if (isActive) {
-            // Center position for active card
+            // Active card: larger scale, no blur
             card.css({
-                'left': '50%',
-                'right': 'auto',
-                'top': '0',
-                'transform': 'translateX(-50%) scale(1)',
+                'transform': 'scale(1.1)',
                 'z-index': '10',
                 'filter': 'none',
                 'opacity': '1'
             });
         } else {
-            // Position inactive cards side by side
-            if (slideIndex === 0) {
-                // Left position (SERVICIOS)
-                card.css({
-                    'left': '0',
-                    'right': 'auto',
-                    'top': '0',
-                    'transform': 'scale(1)',
-                    'z-index': '5',
-                    'filter': 'blur(2px)',
-                    'opacity': '0.7'
-                });
-            } else if (slideIndex === 2) {
-                // Right position (MÁQUINAS)
-                card.css({
-                    'left': 'auto',
-                    'right': '0',
-                    'top': '0',
-                    'transform': 'scale(1)',
-                    'z-index': '5',
-                    'filter': 'blur(2px)',
-                    'opacity': '0.7'
-                });
-            }
+            // Inactive cards: normal scale, with blur
+            card.css({
+                'transform': 'scale(1)',
+                'z-index': '5',
+                'filter': 'blur(2px)',
+                'opacity': '0.7'
+            });
+        }
+        
+        // Maintain fixed positions regardless of active state
+        if (slideIndex === 0) {
+            // SERVICIOS always on left
+            card.css({
+                'left': '0',
+                'right': 'auto',
+                'top': '0'
+            });
+        } else if (slideIndex === 1) {
+            // INSUMOS always in center
+            card.css({
+                'left': '50%',
+                'right': 'auto',
+                'top': '0',
+                'margin-left': '-110px' // Half of card width (220px/2)
+            });
+        } else if (slideIndex === 2) {
+            // MÁQUINAS always on right
+            card.css({
+                'left': 'auto',
+                'right': '0',
+                'top': '0'
+            });
         }
     }
     
